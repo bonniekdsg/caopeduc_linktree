@@ -5,616 +5,289 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAOPEDUC | MPAC</title>
     <meta name="description" content="Página Institucional do CAOPEDUC - Centro de Apoio Operacional de Defesa da Educação do MPAC.">
-    
-    <!-- Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --bg-main: #6EC6C2;
-            --text-main: #FFFFFF;
-            --text-dark: #2C2C2C;
-            --accent-orange: #E8A040;
-            --accent-teal: #2D7A6F;
-            --accent-red: #C94B3A;
-            --accent-brown: #6B3A2A;
-            --accent-blue: #5B8DB8;
-            --accent-purple: #7A5FAD;
-            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            /* Subtle paper/texture overlay using an SVG data URL */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-            background-attachment: fixed;
-            font-family: 'DM Sans', sans-serif;
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .section-title {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-        }
-
-        .container {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
-            flex: 1;
-            width: 100%;
-        }
-
-        /* HEADER */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeInDown 0.8s ease-out forwards;
-        }
-
-        .logo-wrapper {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 0.2rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            font-style: italic;
-            opacity: 0.95;
-            margin-bottom: 0.8rem;
-        }
-
-        .header p {
-            font-size: 0.95rem;
-            opacity: 0.85;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-
-        .tree-illustration {
-            margin: 0 auto 2rem;
-            display: block;
-            width: 180px;
-            height: auto;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-            transition: transform 0.5s ease;
-        }
+        /* Tipografia */
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'DM Sans', sans-serif; }
         
-        .tree-illustration:hover {
-            transform: scale(1.05);
-        }
-
-        /* SECTIONS */
-        .links-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 0.5rem;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .section-title svg {
-            width: 26px;
-            height: 26px;
-            opacity: 0.9;
-        }
-
-        .link-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .link-card {
-            display: flex;
-            align-items: center;
-            background: #ffffff;
-            color: var(--text-dark);
-            padding: 1.25rem 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            box-shadow: var(--shadow-light);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
-            opacity: 0; /* for animation */
-        }
-
-        .link-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 6px;
-            transition: width 0.3s ease;
-        }
-
-        .link-card:hover, .link-card:focus {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-            outline: none;
-        }
-
-        .link-card:hover::before {
-            width: 8px;
-        }
-
-        .icon-wrapper {
-            margin-right: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-        }
-
-        .link-text {
-            flex-grow: 1;
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-        
-        .external-icon {
-            opacity: 0.3;
-            transition: opacity 0.3s ease;
-            width: 18px;
-            height: 18px;
-        }
-        
-        .link-card:hover .external-icon {
-            opacity: 0.8;
-        }
-
-        /* CATEGORY COLORS */
-        .cat-somos::before { background-color: var(--text-dark); }
-        .cat-somos .icon-wrapper svg { stroke: var(--text-dark); }
-
-        .cat-cartilhas::before { background-color: var(--accent-orange); }
-        .cat-cartilhas .icon-wrapper svg { stroke: var(--accent-orange); }
-
-        .cat-normativos::before { background-color: var(--accent-red); }
-        .cat-normativos .icon-wrapper svg { stroke: var(--accent-red); }
-
-        .cat-guias::before { background-color: var(--accent-teal); }
-        .cat-guias .icon-wrapper svg { stroke: var(--accent-teal); }
-
-        .cat-notas::before { background-color: var(--accent-blue); }
-        .cat-notas .icon-wrapper svg { stroke: var(--accent-blue); }
-
-        .cat-cursos::before { background-color: var(--accent-purple); }
-        .cat-cursos .icon-wrapper svg { stroke: var(--accent-purple); }
-
-        /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 2rem 1.5rem;
-            margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(45, 122, 111, 0.1);
-            backdrop-filter: blur(4px);
-        }
-
-        .footer p {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--text-main);
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            opacity: 0.8;
-            display: block;
-        }
-
-        .social-links a:hover {
-            transform: scale(1.15);
-            opacity: 1;
-        }
-
-        /* BACK TO TOP BUTTON */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: var(--text-dark);
-            color: var(--text-main);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 100;
-            border: none;
-            cursor: pointer;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background-color: var(--accent-teal);
-            transform: translateY(-5px);
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+        /* Animações de entrada */
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        
+        /* Delays em cascata */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-600 { animation-delay: 600ms; }
 
-        @keyframes fadeInUpCard {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-card {
-            animation: fadeInUpCard 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        /* Textura sutil de giz/papel no fundo */
+        .bg-texture {
+            background-color: #6EC6C2;
+            background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h32v32H0V0zm16 16h16v16H16V16zm-16 0h16v16H0V16zm16-16h16v16H16V0z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
         
-        /* Mobile adjustments */
-        @media (max-width: 480px) {
-            .header h1 { font-size: 2rem; }
-            .header h2 { font-size: 1.05rem; }
-            .link-card { padding: 1rem 1.2rem; }
-            .icon-wrapper { margin-right: 1rem; }
-            .link-text { font-size: 1rem; }
-        }
+        html { scroll-behavior: smooth; }
+        
+        /* Ocultar barra de rolagem mas permitir rolagem */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body>
+<body class="bg-texture text-white font-sans antialiased min-h-screen relative pb-12 selection:bg-white/30 selection:text-white flex flex-col items-center">
 
-    <main class="container">
+    <!-- Container Principal -->
+    <main class="max-w-xl mx-auto px-5 pt-16 w-full flex flex-col items-center relative z-10">
         
-        <header class="header">
+        <!-- Header Institucional -->
+        <header class="flex flex-col items-center animate-fade-up w-full text-center mb-10">
             <!-- Imagens Hero Lado a Lado -->
-            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
-                <img src="tree.webp" alt="Árvore do Saber CAOPEDUC" class="tree-illustration" style="margin: 0 -20px 0 0; max-width: 275px; z-index: 10;" />
-                <img src="logo_caopeduc.svg" alt="Logo CAOPEDUC" style="max-width: 350px; height: auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); transition: transform 0.5s ease; position: relative;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+            <div class="flex items-center justify-center mb-6 flex-wrap w-full">
+                <img src="tree.webp" alt="Árvore do Saber CAOPEDUC" class="drop-shadow-lg -mr-5 max-w-[275px] z-10 hover:scale-105 transition-transform duration-500 ease-out" />
+                <img src="logo_caopeduc.svg" alt="Logo CAOPEDUC" class="max-w-[350px] drop-shadow-lg relative hover:scale-105 transition-transform duration-500 ease-out z-0" />
             </div>
-            
-            <p>Ministério Público do Estado do Acre</p>
+
+            <p class="text-xs text-white/80 font-medium uppercase tracking-widest mt-1">Ministério Público do Estado do Acre</p>
         </header>
 
-        <!-- SEÇÃO 1: QUEM SOMOS -->
-        <section class="links-section" id="quem-somos">
-            <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                QUEM SOMOS
-            </h3>
-            <ul class="link-list">
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-somos">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
+        <!-- Seções de Links -->
+        <div class="w-full space-y-8">
+            
+            <!-- 📌 QUEM SOMOS -->
+            <section class="w-full animate-fade-up delay-100">
+                <div class="flex items-center gap-2.5 mb-3 px-1">
+                    <iconify-icon icon="solar:users-group-rounded-linear" class="text-white/90" width="20"></iconify-icon>
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-white/90">Quem Somos</h3>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#2D7A6F]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#2D7A6F]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#2D7A6F]/20">
+                            <iconify-icon icon="solar:info-circle-linear" class="text-[#2D7A6F]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Conheça o CAOPEDUC</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Conheça o CAOPEDUC</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#2D7A6F] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-somos">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#2D7A6F]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#2D7A6F]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#2D7A6F]/20">
+                            <iconify-icon icon="solar:target-linear" class="text-[#2D7A6F]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Nossa Missão e Atuação</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Nossa Missão e Atuação</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#2D7A6F] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-            </ul>
-        </section>
+                </div>
+            </section>
 
-        <!-- SEÇÃO 2: CARTILHAS -->
-        <section class="links-section" id="cartilhas">
-            <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                CARTILHAS
-            </h3>
-            <ul class="link-list">
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-cartilhas">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                            </svg>
+            <!-- 📚 CARTILHAS -->
+            <section class="w-full animate-fade-up delay-200">
+                <div class="flex items-center gap-2.5 mb-3 px-1">
+                    <iconify-icon icon="solar:book-bookmark-linear" class="text-white/90" width="20"></iconify-icon>
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-white/90">Cartilhas</h3>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#E8A040]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#E8A040]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#E8A040]/20">
+                            <iconify-icon icon="solar:notebook-minimalistic-linear" class="text-[#E8A040]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Cartilha da Educação Inclusiva</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-cartilhas">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                            </svg>
+                        <div class="flex flex-col flex-grow">
+                            <span class="text-[#2C2C2C] text-sm font-medium tracking-wide">Cartilha da Educação Inclusiva</span>
+                            <span class="text-[#2C2C2C]/60 text-xs font-medium mt-0.5">Orientações para a rede pública</span>
                         </div>
-                        <span class="link-text">Manual de Enfrentamento à Evasão Escolar</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#E8A040] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-cartilhas">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                            </svg>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#E8A040]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#E8A040]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#E8A040]/20">
+                            <iconify-icon icon="solar:book-bookmark-linear" class="text-[#E8A040]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Transporte Escolar Seguro</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Manual de Enfrentamento à Evasão Escolar</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#E8A040] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-            </ul>
-        </section>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#E8A040]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#E8A040]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#E8A040]/20">
+                            <iconify-icon icon="solar:bus-linear" class="text-[#E8A040]" width="22"></iconify-icon>
+                        </div>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Transporte Escolar Seguro</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#E8A040] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
+                    </a>
+                </div>
+            </section>
 
-        <!-- SEÇÃO 3: NORMATIVOS -->
-        <section class="links-section" id="normativos">
-            <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"></path><path d="M6 7l-3 7s1 2 3 2 3-2 3-2l-3-7"></path><path d="M18 7l-3 7s1 2 3 2 3-2 3-2l-3-7"></path><path d="M12 3v18"></path></svg>
-                NORMATIVOS
-            </h3>
-            <ul class="link-list">
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-normativos">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3v18"></path>
-                                <path d="M3 7h18"></path>
-                                <path d="M6 7l-3 7s1 2 3 2 3-2 3-2l-3-7"></path>
-                                <path d="M18 7l-3 7s1 2 3 2 3-2 3-2l-3-7"></path>
-                            </svg>
+            <!-- ⚖️ NORMATIVOS -->
+            <section class="w-full animate-fade-up delay-300">
+                <div class="flex items-center gap-2.5 mb-3 px-1">
+                    <iconify-icon icon="solar:scale-linear" class="text-white/90" width="20"></iconify-icon>
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-white/90">Normativos</h3>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#C94B3A]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#C94B3A]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#C94B3A]/20">
+                            <iconify-icon icon="solar:document-text-linear" class="text-[#C94B3A]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Legislação Estadual de Educação</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Legislação Estadual de Educação</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#C94B3A] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-normativos">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#C94B3A]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#C94B3A]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#C94B3A]/20">
+                            <iconify-icon icon="solar:file-check-linear" class="text-[#C94B3A]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Resoluções do MPAC</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Resoluções do MPAC</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#C94B3A] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-            </ul>
-        </section>
+                </div>
+            </section>
 
-        <!-- SEÇÃO 4: GUIAS ORIENTATIVOS -->
-        <section class="links-section" id="guias">
-            <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-                GUIAS ORIENTATIVOS
-            </h3>
-            <ul class="link-list">
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-guias">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                            </svg>
+            <!-- 🗺️ GUIAS ORIENTATIVOS -->
+            <section class="w-full animate-fade-up delay-400">
+                <div class="flex items-center gap-2.5 mb-3 px-1">
+                    <iconify-icon icon="solar:map-point-linear" class="text-white/90" width="20"></iconify-icon>
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-white/90">Guias Orientativos</h3>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#2D7A6F]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#2D7A6F]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#2D7A6F]/20">
+                            <iconify-icon icon="solar:compass-linear" class="text-[#2D7A6F]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Guia Prático para Conselheiros</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Guia Prático para Conselheiros</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#2D7A6F] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-guias">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-                                <line x1="8" y1="2" x2="8" y2="18"></line>
-                                <line x1="16" y1="6" x2="16" y2="22"></line>
-                            </svg>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#2D7A6F]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#2D7A6F]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#2D7A6F]/20">
+                            <iconify-icon icon="solar:clipboard-check-linear" class="text-[#2D7A6F]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Orientações para Gestores Escolares</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Orientações para Gestores Escolares</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#2D7A6F] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-            </ul>
-        </section>
+                </div>
+            </section>
 
-        <!-- SEÇÃO 5: NOTAS TÉCNICAS -->
-        <section class="links-section" id="notas-tecnicas">
-            <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14h6"></path><path d="M9 18h6"></path><path d="M9 10h6"></path></svg>
-                NOTAS TÉCNICAS
-            </h3>
-            <ul class="link-list">
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-notas">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                                <path d="M9 14h6"></path>
-                                <path d="M9 18h6"></path>
-                                <path d="M9 10h6"></path>
-                            </svg>
+            <!-- 📋 NOTAS TÉCNICAS -->
+            <section class="w-full animate-fade-up delay-500">
+                <div class="flex items-center gap-2.5 mb-3 px-1">
+                    <iconify-icon icon="solar:clipboard-text-linear" class="text-white/90" width="20"></iconify-icon>
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-white/90">Notas Técnicas</h3>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#5B8DB8]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#5B8DB8]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#5B8DB8]/20">
+                            <iconify-icon icon="solar:file-text-linear" class="text-[#5B8DB8]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Pareceres Técnicos 2025</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Pareceres Técnicos 2025</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#5B8DB8] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-notas">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#5B8DB8]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#5B8DB8]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#5B8DB8]/20">
+                            <iconify-icon icon="solar:documents-linear" class="text-[#5B8DB8]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Recomendações Conjuntas</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span class="flex-grow text-[#2C2C2C] text-sm font-medium tracking-wide">Recomendações Conjuntas</span>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#5B8DB8] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-            </ul>
-        </section>
+                </div>
+            </section>
 
-        <!-- SEÇÃO 6: CURSOS E CAPACITAÇÕES -->
-        <section class="links-section" id="cursos">
-            <h3 class="section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                CURSOS E CAPACITAÇÕES
-            </h3>
-            <ul class="link-list">
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-cursos">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                            </svg>
+            <!-- 🎓 CURSOS E CAPACITAÇÕES -->
+            <section class="w-full animate-fade-up delay-600">
+                <div class="flex items-center gap-2.5 mb-3 px-1">
+                    <iconify-icon icon="solar:diploma-linear" class="text-white/90" width="20"></iconify-icon>
+                    <h3 class="text-sm font-bold tracking-wider uppercase text-white/90">Cursos e Capacitações</h3>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#7A5FAD]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#7A5FAD]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#7A5FAD]/20">
+                            <iconify-icon icon="solar:video-library-linear" class="text-[#7A5FAD]" width="22"></iconify-icon>
                         </div>
-                        <span class="link-text">Webinário: Direitos da Criança</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="link-card cat-cursos">
-                        <div class="icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
+                        <div class="flex flex-col flex-grow">
+                            <span class="text-[#2C2C2C] text-sm font-medium tracking-wide">Webinário: Direitos da Criança</span>
+                            <span class="text-[#2C2C2C]/60 text-xs font-medium mt-0.5">Assista no YouTube</span>
                         </div>
-                        <span class="link-text">Formação Continuada para Promotores</span>
-                        <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#7A5FAD] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
                     </a>
-                </li>
-            </ul>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden border-l-[4px] border-[#7A5FAD]">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#7A5FAD]/10 mr-4 shrink-0 transition-colors group-hover:bg-[#7A5FAD]/20">
+                            <iconify-icon icon="solar:diploma-linear" class="text-[#7A5FAD]" width="22"></iconify-icon>
+                        </div>
+                        <div class="flex flex-col flex-grow">
+                            <span class="text-[#2C2C2C] text-sm font-medium tracking-wide">Formação Continuada para Promotores</span>
+                        </div>
+                        <iconify-icon icon="solar:alt-arrow-right-linear" class="text-gray-300 group-hover:text-[#7A5FAD] group-hover:translate-x-1 transition-all duration-300" width="20"></iconify-icon>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="w-full mt-16 pt-8 pb-4 border-t border-white/20 flex flex-col items-center animate-fade-up delay-600">
+            <!-- Logo MPAC -->
+            <img src="logo_mpac.svg" alt="Logo MPAC" class="max-h-14 opacity-90 drop-shadow-md mb-4" />
+
+            <!-- Redes Sociais -->
+            <div class="flex gap-4 mb-6">
+                <!-- MPAC Site -->
+                <a href="https://www.mpac.mp.br" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 shadow-sm backdrop-blur-sm" aria-label="Site Oficial MPAC">
+                    <svg width="22" height="22" fill="currentColor" class="text-white" viewBox="0 0 200 200">
+                        <path fill-rule="evenodd" d="M163.95,78.07v43.57c3.32,2.61,6.48,5.41,9.45,8.4,3.64,3.66,7.03,7.62,10.11,11.83,1.84,2.51,3.56,5.1,5.17,7.77V50.18l-.4.71c-1.74,3.01-3.85,5.79-6.16,8.8-1.37,1.78-2.77,3.49-4.2,5.13-1.44,1.64-2.95,3.25-4.53,4.84h0s0,0,0,0c-2.97,2.99-6.13,5.79-9.45,8.4"/>
+                        <path fill-rule="evenodd" d="M11.96,46.65c1.82,3.29,3.81,6.48,5.97,9.55,3.39,4.82,7.18,9.33,11.3,13.48,2.38,2.39,4.87,4.66,7.47,6.81v46.76c-2.6,2.15-5.09,4.42-7.47,6.81l-.09.09c-4.1,4.13-7.86,8.61-11.21,13.39-2.16,3.07-4.15,6.25-5.97,9.55V46.65Z"/>
+                        <rect x="88.91" y="136.19" width="22.29" height="22.4"/>
+                        <path d="M175.54,61.96c1.43-1.64,2.8-3.3,4.08-4.97,2.24-2.91,4.28-5.61,5.93-8.46,1.32-2.28,2.4-4.68,3.15-7.4h-22.3c-1.31,1.91-2.7,3.77-4.16,5.55-1.67,2.04-3.41,3.97-5.21,5.78-7.33,7.36-16.09,13.3-25.84,17.36-9.38,3.9-19.65,6.06-30.41,6.06s-21.04-2.16-30.42-6.06c-9.75-4.06-18.51-9.99-25.84-17.36h0s0,0,0,0c-1.82-1.83-3.56-3.76-5.21-5.77-1.46-1.79-2.85-3.64-4.16-5.55H11.96c2.2,4.35,4.7,8.52,7.48,12.47,3.27,4.65,6.94,9.02,10.96,13.06,9.18,9.23,20.14,16.66,32.31,21.73,11.72,4.88,24.58,7.57,38.07,7.57s26.35-2.7,38.06-7.57c12.17-5.07,23.13-12.5,32.31-21.73h0c1.49-1.5,2.96-3.07,4.39-4.7"/>
+                        <path d="M175.54,132.93c1.43,1.41,2.8,2.83,4.08,4.26,2.24,2.5,4.28,4.81,5.93,7.26,1.32,1.96,2.4,4.02,3.15,6.35h-22.3c-1.31-1.64-2.7-3.23-4.16-4.76-1.67-1.75-3.41-3.41-5.21-4.96-7.33-6.32-16.09-11.41-25.84-14.89-9.38-3.35-19.65-5.2-30.41-5.2s-21.04,1.85-30.42,5.2c-9.75,3.48-18.51,8.58-25.84,14.89h0s0,0,0,0c-1.82,1.57-3.56,3.23-5.21,4.95-1.46,1.53-2.85,3.12-4.16,4.76H11.96c2.2-3.73,4.7-7.31,7.48-10.7,3.27-3.99,6.94-7.74,10.96-11.2,9.18-7.92,20.14-14.29,32.31-18.64,11.72-4.19,24.58-6.5,38.07-6.5s26.35,2.31,38.06,6.5c12.17,4.35,23.13,10.72,32.31,18.64h0c1.49,1.28,2.96,2.63,4.39,4.04"/>
+                    </svg>
+                </a>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/mpacre" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 shadow-sm backdrop-blur-sm" aria-label="Facebook">
+                    <iconify-icon icon="mdi:facebook" width="22" class="text-white"></iconify-icon>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/mpacre/" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 shadow-sm backdrop-blur-sm" aria-label="Instagram">
+                    <iconify-icon icon="mdi:instagram" width="22" class="text-white"></iconify-icon>
+                </a>
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/mpacre" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 shadow-sm backdrop-blur-sm" aria-label="YouTube">
+                    <iconify-icon icon="mdi:youtube" width="22" class="text-white"></iconify-icon>
+                </a>
+                <!-- X (Twitter) -->
+                <a href="https://x.com/mpacre" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 shadow-sm backdrop-blur-sm" aria-label="X">
+                    <iconify-icon icon="ri:twitter-x-line" width="22" class="text-white"></iconify-icon>
+                </a>
+            </div>
+            
+            <!-- Copyright -->
+            <p class="text-xs text-white/70 font-medium tracking-wide text-center">© MPAC – Ministério Público do Estado do Acre</p>
+        </footer>
+
     </main>
 
-    <footer class="footer" style="display: flex; flex-direction: column; align-items: center; padding: 2rem 0;">
-        <img src="logo_mpac.svg" alt="Logo MPAC" style="max-height: 56px; opacity: 0.9; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); margin-bottom: 1rem;" />
-        <div class="social-links" style="display: flex; justify-content: center; gap: 1.5rem;">
-            <a aria-label="MPAC" href="https://www.mpac.mp.br" target="_blank" rel="noopener noreferrer" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 200 200"><path fill-rule="evenodd" d="M163.95,78.07v43.57c3.32,2.61,6.48,5.41,9.45,8.4,3.64,3.66,7.03,7.62,10.11,11.83,1.84,2.51,3.56,5.1,5.17,7.77V50.18l-.4.71c-1.74,3.01-3.85,5.79-6.16,8.8-1.37,1.78-2.77,3.49-4.2,5.13-1.44,1.64-2.95,3.25-4.53,4.84h0s0,0,0,0c-2.97,2.99-6.13,5.79-9.45,8.4"/><path fill-rule="evenodd" d="M11.96,46.65c1.82,3.29,3.81,6.48,5.97,9.55,3.39,4.82,7.18,9.33,11.3,13.48,2.38,2.39,4.87,4.66,7.47,6.81v46.76c-2.6,2.15-5.09,4.42-7.47,6.81l-.09.09c-4.1,4.13-7.86,8.61-11.21,13.39-2.16,3.07-4.15,6.25-5.97,9.55V46.65Z"/><rect x="88.91" y="136.19" width="22.29" height="22.4"/><path d="M175.54,61.96c1.43-1.64,2.8-3.3,4.08-4.97,2.24-2.91,4.28-5.61,5.93-8.46,1.32-2.28,2.4-4.68,3.15-7.4h-22.3c-1.31,1.91-2.7,3.77-4.16,5.55-1.67,2.04-3.41,3.97-5.21,5.78-7.33,7.36-16.09,13.3-25.84,17.36-9.38,3.9-19.65,6.06-30.41,6.06s-21.04-2.16-30.42-6.06c-9.75-4.06-18.51-9.99-25.84-17.36h0s0,0,0,0c-1.82-1.83-3.56-3.76-5.21-5.77-1.46-1.79-2.85-3.64-4.16-5.55H11.96c2.2,4.35,4.7,8.52,7.48,12.47,3.27,4.65,6.94,9.02,10.96,13.06,9.18,9.23,20.14,16.66,32.31,21.73,11.72,4.88,24.58,7.57,38.07,7.57s26.35-2.7,38.06-7.57c12.17-5.07,23.13-12.5,32.31-21.73h0c1.49-1.5,2.96-3.07,4.39-4.7"/><path d="M175.54,132.93c1.43,1.41,2.83,2.83,4.08,4.26,2.24,2.5,4.28,4.81,5.93,7.26,1.32,1.96,2.4,4.02,3.15,6.35h-22.3c-1.31-1.64-2.7-3.23-4.16-4.76-1.67-1.75-3.41-3.41-5.21-4.96-7.33-6.32-16.09-11.41-25.84-14.89-9.38-3.35-19.65-5.2-30.41-5.2s-21.04,1.85-30.42,5.2c-9.75,3.48-18.51,8.58-25.84,14.89h0s0,0,0,0c-1.82,1.57-3.56,3.23-5.21,4.95-1.46,1.53-2.85,3.12-4.16,4.76H11.96c2.2-3.73,4.71-7.31,7.48-10.7,3.27-3.99,6.94-7.74,10.96-11.2,9.18-7.92,20.14-14.29,32.31-18.64,11.72-4.19,24.58-6.5,38.07-6.5s26.35,2.31,38.06,6.5c12.17,4.35,23.13,10.72,32.31,18.64h0c1.49,1.28,2.96,2.63,4.39,4.04"/></svg>
-            </a>
-            <a aria-label="Facebook" href="https://www.facebook.com/mpacre" target="_blank" rel="noopener noreferrer" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-            </a>
-            <a aria-label="Instagram" href="https://www.instagram.com/mpacre/" target="_blank" rel="noopener noreferrer" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98C23.986 15.667 24 15.259 24 12s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"></path></svg>
-            </a>
-            <a aria-label="YouTube" href="https://www.youtube.com/mpacre" target="_blank" rel="noopener noreferrer" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.003 3.003 0 0 0-2.118-2.12C19.658 3.5 12 3.5 12 3.5s-7.658 0-9.38.566A3.003 3.003 0 0 0 .502 6.186 31.54 31.54 0 0 0 0 12c0 1.938.169 3.862.502 5.814a3.003 3.003 0 0 0 2.118 2.12C4.842 20.5 12 20.5 12 20.5s7.658 0 9.38-.566a3.003 3.003 0 0 0 2.118-2.12C23.831 15.862 24 13.938 24 12c0-1.938-.169-3.862-.502-5.814zM9.6 15.5v-7l6.4 3.5-6.4 3.5z"/></svg>
-            </a>
-            <a aria-label="X" href="https://x.com/mpacre" target="_blank" rel="noopener noreferrer" style="color: white; opacity: 0.8; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-        </div>
-    </footer>
+    <!-- Botão Voltar ao Topo -->
+    <a href="#" id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-[#2C2C2C]/30 backdrop-blur-md border border-white/10 flex items-center justify-center text-white shadow-lg hover:bg-[#2C2C2C]/50 transition-all duration-300 opacity-0 pointer-events-none group z-50" aria-label="Voltar ao topo">
+        <iconify-icon icon="solar:alt-arrow-up-linear" width="24" class="group-hover:-translate-y-1 transition-transform duration-300"></iconify-icon>
+    </a>
 
-    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-    </button>
-
+    <!-- Lógica do Botão Flutuante -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Animating cards with staggered delay
-            const linkCards = document.querySelectorAll('.link-card');
-            
-            // Apply delay based on the index across the whole page to stagger properly
-            linkCards.forEach((card, index) => {
-                // Short formula to create a nice stagger effect
-                const delay = 0.1 + (index * 0.08); 
-                card.style.animationDelay = `${delay}s`;
-                card.classList.add('animate-card');
-            });
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('opacity-100');
+            }
+        });
 
-            // Back to top button logic
-            const backToTopButton = document.getElementById('back-to-top');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            });
-
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
+
 </body>
 </html>
